@@ -1,25 +1,46 @@
 // fizzbuzz.js
 
-define([], function() {
+define([ "jquery", ], function($) {
 
-  function fb(n) {
-    n = Math.floor(n);      // force to integer
-    return {
-      n: n,
-      fizz: n % 3 === 0,
-      buzz: n % 5 === 0
-    };
+  var BOTTOM = 1, TOP = 100;
+
+  function isFactor(n, m) {
+    return n % m === 0;
   }
 
-  function fbToString(fb) {
-    return (!fb.fizz && !fb.buzz) ? String(fb.n) : (fb.fizz ? "Fizz" : "") + (fb.buzz ? "Buzz" : "")
+  function hasDigit(n, m) {
+    for (n = Math.abs(Math.floor(n)); n != 0; n = Math.floor(n / 10)) {
+      if (n % 10 == m) {
+        return true;
+      }
+    }
+    return false;
   }
 
-  function toString(n) {
-    return typeof n === "number" ? fbToString(fb(n)) : String(fb);
+  function isFactorOrHasDigit(n, m) {
+    return isFactor(n, m) || hasDigit(n, m);
+  }
+
+  function fizzbuzz(n, fizzFunc) {
+    var fizz = fizzFunc(n, 3);
+    var buzz = fizzFunc(n, 5);
+    return (!fizz && !buzz) ? String(n) : (fizz ? "Fizz" : "") + (buzz ? "Buzz" : "");
+  }
+
+  function run(jqSel, fbFunc) {
+    for (var n = BOTTOM; n <= TOP; ++n) {
+      var paragraph = $("<p>");
+      paragraph.text(fizzbuzz(n, fbFunc));
+      $(jqSel).append(paragraph);
+    }
   }
 
   return {
-    toString: toString
+    v1: function(jqSel) {
+      run(jqSel, isFactor);
+    },
+    v2: function(jqSel) {
+      run(jqSel, isFactorOrHasDigit);
+    }
   }
 });
