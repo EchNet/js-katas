@@ -1,0 +1,21 @@
+<html>
+<head>
+<title>JS Katas</title>
+<link rel="stylesheet" type="text/css" href="css/styles.css">
+<script>
+var require = {
+  baseUrl: "/js",
+  paths: {
+    "jquery": "jquery-1.7.2"
+  },
+  map: {
+    "*": { "jquery": "jquery-private" },
+    "jquery-private": { "jquery": "jquery" }
+  },
+  deps: [ "app" ],
+  callback: function(app) { app(); }
+}
+</script>
+<script src="js/require.js"></script>
+</head>
+</html>
