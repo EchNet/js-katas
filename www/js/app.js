@@ -1,10 +1,11 @@
 // app.js
 
-define([ "jquery", "fizzbuzz" ], function($, fizzbuzz) {
+define([ "jquery", "fizzbuzz", "bankocr" ], function($, fizzbuzz, bankocr) {
 
   var OPTIONS = {
     "Fizz Buzz": fizzbuzz.v1,
-    "Fizz Buzz (version 2)": fizzbuzz.v2
+    "Fizz Buzz (version 2)": fizzbuzz.v2,
+    "Bank OCR": bankocr.ui
   }
 
   function makeModuleRunner(module) {
