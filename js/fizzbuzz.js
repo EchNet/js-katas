@@ -38,10 +38,12 @@ define([], function() {
     return fizzbuzzer(n, isFactor);
   }
 
+  // The fizz-buzz function, version 2.
   function fizzIfIsFactorOrDigit(n) {
     return fizzbuzzer(n, isFactorOrDigit);
   }
 
+  // Module export.
   return {
     fizzIfIsFactor: fizzIfIsFactor,
     fizzIfIsFactorOrDigit: fizzIfIsFactorOrDigit

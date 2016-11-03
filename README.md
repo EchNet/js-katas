@@ -1,9 +1,11 @@
 # js-katas
 
-Some coding exercises, in Javascript.
+Some coding exercises from codingdojo.org, written in Javascript.
 
-Requires nodejs and npm.
+Required software: nodejs and npm.
+
+To install packages: `npm install`
 
 To run the server: `node server`
 
-Server runs on port 4567.
+To view source code and run tests, browse to `localhost:4567`

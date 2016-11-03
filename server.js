@@ -56,6 +56,11 @@ var APPS = {
     stylesheet: "css/styles.css",
     main: "fizzbuzzui2"
   }),
+  "fizz_buzz_specs": new App({
+    title: "Fizz Buzz Specs",
+    stylesheet: "./node_modules/grunt-blanket-mocha/node_modules/mocha/mocha.css",
+    main: "fizzbuzzspec"
+  }),
   "bank_ocr_ui": new App({
     title: "Bank OCR UI",
     stylesheet: "css/styles.css",
