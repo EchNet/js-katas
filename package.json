@@ -6,12 +6,10 @@
   "private": true,
   "version": "0.1.0",
   "dependencies": {
-    "express": "^4.13.4",
-    "mocha": "^2.4.5",
     "chai": "^1.10.0",
-    "promise": "^7.1.1",
-    "winston": "^2.2.0",
-    "yargs": "^4.6.0"
+    "express": "^4.13.4",
+    "grunt": "^0.4.5",
+    "mocha": "^2.4.5"
   },
   "devDependencies": {},
   "engines": {

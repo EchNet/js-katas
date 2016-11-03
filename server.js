@@ -10,20 +10,6 @@ var CONFIG = {
   }
 }
 
-var CONFIG_JS = '' +
-  'var require = { \n' +
-  '  baseUrl: "/js", \n' +
-  '  paths: { \n' +
-  '    "jquery": "jquery-' + CONFIG.javascript.jqueryVersion + '" \n' +
-  '  }, \n' +
-  '  map: { \n' +
-  '    "*": { "jquery": "jquery-private" }, \n' +
-  '    "jquery-private": { "jquery": "jquery" } \n' +
-  '  }, \n' +
-  '  deps: [ "app" ], \n' +
-  '  callback: function(app) { app(); } \n' +
-  '}\n';
-
 function newServer() {
   var express = require("express");
   var server = express();
@@ -32,20 +18,31 @@ function newServer() {
 }
 
 function handleConfigJs(req, res) {
+  var main = req.query.main || "app";
+  var configJs = '' +
+    'var require = { \n' +
+    '  baseUrl: "/js", \n' +
+    '  paths: { \n' +
+    '    "jquery": "jquery-' + CONFIG.javascript.jqueryVersion + '" \n' +
+    '  }, \n' +
+    '  map: { \n' +
+    '    "*": { "jquery": "jquery-private" }, \n' +
+    '    "jquery-private": { "jquery": "jquery" } \n' +
+    '  }, \n' +
+    '  deps: [ "' + main + '" ], \n' +
+    '  callback: function(app) { app && app(); } \n' +
+    '}\n';
   res.set("Content-Type", "application/javascript");
-  res.send(CONFIG_JS);
+  res.send(configJs);
 }
 
 (function() {
   var server = newServer();
-  var port = process.env.PORT || CONFIG.server.port;
 
+  var port = process.env.PORT || CONFIG.server.port;
   server.set("port", port);
 
-  server.get("/config.js", function(req, res) {
-    res.set("Content-Type", "application/javascript");
-    res.send(CONFIG_JS);
-  });
+  server.get("/config.js", handleConfigJs);
 
   server.listen(port, function () {
     console.log("Listening on port", port);
