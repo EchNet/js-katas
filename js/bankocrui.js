@@ -36,9 +36,14 @@ define([ "jquery", "bankocr" ], function($, bankocr) {
     scratchPad.on("change paste keyup", updateEvaluation);
 
     $("body")
+      .append($("<h1>").text("Bank OCR Kata"))
+      .append($("<div>").text("Enter a number here:"))
       .append($("<div>").append(textInput))
+      .append($("<div>").text("Copy from here:"))
       .append($("<div>").append(textOutput))
+      .append($("<div>").text("Paste it here:"))
       .append($("<div>").append(scratchPad))
+      .append($("<div>").text("Results here:"))
       .append($("<div>").append(evalTable));
   }
 });

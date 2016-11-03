@@ -1,14 +1,18 @@
 // fizzbuzz.js
+// http://codingdojo.org/cgi-bin/index.pl?KataFizzBuzz Parts 1 and 2
 
-define([ "jquery", ], function($) {
+define([], function() {
 
-  var BOTTOM = 1, TOP = 100;
+  var FIZZ_FACTOR = 3, BUZZ_FACTOR = 5;
+  var FIZZ_STR = "Fizz", BUZZ_STR = "Buzz";
 
+  // Return true if m is a factor of n.
   function isFactor(n, m) {
     return n % m === 0;
   }
 
-  function hasDigit(n, m) {
+  // Return true if m appears as a base10 digit of n.
+  function isDigit(n, m) {
     for (n = Math.abs(Math.floor(n)); n != 0; n = Math.floor(n / 10)) {
       if (n % 10 == m) {
         return true;
@@ -17,30 +21,29 @@ define([ "jquery", ], function($) {
     return false;
   }
 
-  function isFactorOrHasDigit(n, m) {
-    return isFactor(n, m) || hasDigit(n, m);
+  // Return true if m is a factor or appears as a base10 digit of n.
+  function isFactorOrDigit(n, m) {
+    return isFactor(n, m) || isDigit(n, m);
   }
 
-  function fizzbuzz(n, fizzFunc) {
-    var fizz = fizzFunc(n, 3);
-    var buzz = fizzFunc(n, 5);
-    return (!fizz && !buzz) ? String(n) : (fizz ? "Fizz" : "") + (buzz ? "Buzz" : "");
+  // Return the given value, or replace it with "Fizz", "Buzz" or "FizzBuzz" as appropriate.
+  function fizzbuzzer(n, fizzFunc) {
+    var fizz = fizzFunc(n, FIZZ_FACTOR);
+    var buzz = fizzFunc(n, BUZZ_FACTOR);
+    return (!fizz && !buzz) ? String(n) : (fizz ? FIZZ_STR : "") + (buzz ? BUZZ_STR : "");
   }
 
-  function run(jqSel, fbFunc) {
-    for (var n = BOTTOM; n <= TOP; ++n) {
-      var paragraph = $("<p>");
-      paragraph.text(fizzbuzz(n, fbFunc));
-      $(jqSel).append(paragraph);
-    }
+  // The fizz-buzz function, version 1.
+  function fizzIfIsFactor(n) {
+    return fizzbuzzer(n, isFactor);
+  }
+
+  function fizzIfIsFactorOrDigit(n) {
+    return fizzbuzzer(n, isFactorOrDigit);
   }
 
   return {
-    v1: function(jqSel) {
-      run(jqSel, isFactor);
-    },
-    v2: function(jqSel) {
-      run(jqSel, isFactorOrHasDigit);
-    }
+    fizzIfIsFactor: fizzIfIsFactor,
+    fizzIfIsFactorOrDigit: fizzIfIsFactorOrDigit
   }
 });

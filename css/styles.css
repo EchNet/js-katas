@@ -1,14 +1,12 @@
 body {
 	font-family: Arial;
-  font-size: 12px;
 }
 div {
 	margin: 2px 0px;
 	padding: 0;
 }
-p {
-	margin: 2px;
-	padding: 0;
+.small {
+	font-size: 12px;
 }
 h1 {
 	font-size: 24px;
