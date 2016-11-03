@@ -22,6 +22,9 @@ App.prototype.generateHtml = function() {
     '<link rel="stylesheet" type="text/css" href="' + appProps.stylesheet + '">\n' +
     '<title>' + appProps.title + '</title>\n' +
     '</head>\n' +
+    '<body>\n' +
+    '<h1>' + appProps.title + '</h1>\n' +
+    '</body>\n' +
     '<script>\n' +
     'var require = {\n' +
     '  baseUrl: "/js",\n' +
